@@ -1,3 +1,4 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=st
 Comment=st is a simple terminal implementation for X

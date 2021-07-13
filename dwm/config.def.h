@@ -69,6 +69,8 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
+#include <X11/XF86keysym.h>
+
 /*
  * Xresources preferences to load at startup
  */
@@ -89,13 +91,12 @@ ResourcePref resources[] = {
 		{ "mfact",      	 	FLOAT,   &mfact },
 };
 
-#include <X11/XF86keysym.h>
-
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,			            XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,			            XK_b, spawn,    		SHCMD("librewolf") },
+	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
@@ -125,6 +126,9 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_k,      quit,           {0} },
+	{ 0, XF86XK_AudioMute,			spawn,		SHCMD("pamixer -t") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 10") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 10") },
 	/* stupid shit */
 	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
 	{ MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
