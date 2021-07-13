@@ -3,14 +3,15 @@
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 15;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 20;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 20;       /* vert outer gap between windows and screen edge */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int user_bh = 30;
 static char font[]            = "monospace:size=10";
 static char dmenufont[]       = "monospace:size=10";
 static const char *fonts[]          = { font };
@@ -27,7 +28,7 @@ static char *colors[][3] = {
 };
  
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -91,11 +92,17 @@ ResourcePref resources[] = {
 		{ "mfact",      	 	FLOAT,   &mfact },
 };
 
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,			            XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,			            XK_b, spawn,    		SHCMD("librewolf") },
+	{ MODKEY,			            XK_x,	   spawn,			SHCMD("discord") },
+	{ MODKEY,			            XK_b,	   spawn,			SHCMD("librewolf") },
+	{ MODKEY,			            XK_p,	   spawn,			SHCMD("passmenu") },
+	{ MODKEY|ShiftMask,				XK_y,      spawn,			SHCMD("ss link") },
+	{ MODKEY,			            XK_n,      spawn,			SHCMD("st -e newsboat") },
+	{ MODKEY|ShiftMask,				XK_c,      spawn,			SHCMD("xcolor | xclip -selection clipboard") },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -126,9 +133,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_k,      quit,           {0} },
-	{ 0, XF86XK_AudioMute,			spawn,		SHCMD("pamixer -t") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 10") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 10") },
+	{ 0, XF86XK_AudioMute,			spawn,		SHCMD("vol m | kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("vol i | kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("vol d | kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("bri i | kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("bri d | kill -44 $(pidof dwmblocks)") },
 	/* stupid shit */
 	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
 	{ MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
