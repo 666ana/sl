@@ -74,21 +74,20 @@ static const char *termcmd[]  = { "st", NULL };
  */
 ResourcePref resources[] = {
 		{ "font",               STRING,  &font },
-		{ "dmenufont",          STRING,  &dmenufont },
-		{ "normbgcolor",        STRING,  &normbgcolor },
-		{ "normbordercolor",    STRING,  &normbordercolor },
-		{ "normfgcolor",        STRING,  &normfgcolor },
-		{ "selbgcolor",         STRING,  &selbgcolor },
-		{ "selbordercolor",     STRING,  &selbordercolor },
-		{ "selfgcolor",         STRING,  &selfgcolor },
-		{ "borderpx",          	INTEGER, &borderpx },
+		{ "color0",				STRING,	&normbordercolor },
+		{ "color8",				STRING,	&selbordercolor },
+		{ "color0",				STRING,	&normbgcolor },
+		{ "color4",				STRING,	&normfgcolor },
+		{ "color0",				STRING,	&selfgcolor },
+		{ "color4",				STRING,	&selbgcolor },
+		{ "borderpx",			INTEGER, &borderpx },
 		{ "snap",          		INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
 		{ "topbar",          	INTEGER, &topbar },
 		{ "nmaster",          	INTEGER, &nmaster },
 		{ "resizehints",       	INTEGER, &resizehints },
 		{ "mfact",      	 	FLOAT,   &mfact },
- };
+};
 
 #include <X11/XF86keysym.h>
 
