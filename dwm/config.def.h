@@ -10,7 +10,7 @@ static const unsigned int gappov    = 20;       /* vert outer gap between window
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 0;        /* 0 means bottom bar */
+static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh = 30;
 static char font[]            = "monospace:size=10";
 static char dmenufont[]       = "monospace:size=10";
@@ -103,6 +103,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				XK_y,      spawn,			SHCMD("ss link") },
 	{ MODKEY,			            XK_n,      spawn,			SHCMD("st -e newsboat") },
 	{ MODKEY,			            XK_f,      spawn,			SHCMD("st -e ranger") },
+	{ MODKEY,			            XK_k,      spawn,			SHCMD("sdmenu") },
+	{ MODKEY,			            XK_o,      spawn,			SHCMD("tdmenu") },
+	{ MODKEY,			            XK_i,      spawn,			SHCMD("rdmenu") },
 	{ MODKEY,			            XK_e,      spawn,			SHCMD("st -e neomutt") },
 	{ MODKEY|ShiftMask,				XK_c,      spawn,			SHCMD("xcolor | xclip -selection clipboard") },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
@@ -140,7 +143,6 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("vol d | kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("bri i | kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("bri d | kill -44 $(pidof dwmblocks)") },
-	/* stupid shit */
 	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
 	{ MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
@@ -149,8 +151,8 @@ static Key keys[] = {
 	{ MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
 	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
-	{ MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
-	{ MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_y,      incrihgaps,     {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_o,      incrihgaps,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
 	{ MODKEY|Mod4Mask,              XK_y,      incrohgaps,     {.i = +1 } },
